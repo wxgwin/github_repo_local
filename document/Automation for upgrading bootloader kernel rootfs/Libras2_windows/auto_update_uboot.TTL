@@ -1,0 +1,29 @@
+bootloader_file = "c:\bin\bootloader.sign"
+
+connect '/C=1'
+
+waitln "Board information"
+i = 50
+do while i>0
+    i = i - 1
+    sendln ""
+loop
+
+waitln "Libra>"
+
+sendln ""
+sendln ""
+pause 3
+
+sendln "xmodem loader"
+pause 3
+xmodemsend bootloader_file 1
+waitln "successfully"
+pause 2
+sendln ""
+
+sendln "flash loader"
+waitln "MTD write successful"
+pause 2
+sendln ""
+

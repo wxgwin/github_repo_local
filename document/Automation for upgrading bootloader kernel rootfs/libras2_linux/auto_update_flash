@@ -1,0 +1,84 @@
+#!/usr/local/bin/kermit +
+set line /dev/ttyS0
+IF FAIL EXIT 1 "Device not available"
+set speed 115200
+set carrier-watch off
+set handshake none
+set flow-control none
+
+input 30 "Board information"
+IF FAIL EXIT 1 "Please reset board"
+output \13
+output \13
+
+input 10 "Libra>"
+IF FAIL EXIT 1 "Please reset board"
+output \13
+
+output tftp bootloader_for_lium loader\13
+input 10 TFTP: complted
+IF FAIL EXIT 1 "Please reset board: tftp loader error"
+output \13
+
+output flash loader\13
+input 10 MTD write successful
+IF FAIL EXIT 1 "Please reset board: write loader error"
+output \13
+
+output tftp zImage_for_lium_libra2_ubi_ntfs kernel\13
+input 100 TFTP: complted
+IF FAIL EXIT 1 "Please reset board: tftp kernel error"
+output \13
+
+output flash kernel\13
+input 10 MTD write successful
+IF FAIL EXIT 1 "Please reset board: write kernel error"
+output \13
+
+output obd set CMD_LINE_ETH_BOOT console=ttyLBR2,115200 mem=64M ip=bootp root=/dev/nfs rw nolock,tcp nfsroot=192.168.1.99:/nfsroot/lium.rootfs/ no_console_suspend=1\13
+
+output doboot eth\13
+input 100 Starting mdev
+IF FAIL EXIT 1 "Please reset board: NFS rootfs error"
+output \13
+
+pause 3
+output \13
+
+
+output flash_erase /dev/mtd0 0 0\13
+input 30 100 % complete
+IF FAIL EXIT 1 "Please reset board: erase nand error"
+output \13
+
+output ubiattach /dev/ubi_ctrl -m 0 -d 0\13
+input 30 UBI device number 0
+IF FAIL EXIT 1 "Please reset board: ubiattach error"
+output \13
+
+output ubimkvol /dev/ubi0 -N rootfs -s 480MiB\13
+input 30 rootfs
+IF FAIL EXIT 1 "Please reset board: ubimkvol error"
+output \13
+
+output mount -t ubifs ubi0_0 /mnt\13
+input 30 UBIFS: reserved for root:
+IF FAIL EXIT 1 "Please reset board: mount nand error"
+output \13
+
+output tar -zxf lium.rootfs.tar.gz -C /mnt\13
+output sync\13
+output umount /mnt\13
+input 700 un-mount UBI device
+IF FAIL EXIT 1 "Please reset board: umount error\n"
+output \13
+
+pause 2
+output \13
+output \13
+echo All update successfully\13
+output \13
+
+EXIT
+
+

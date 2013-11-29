@@ -1,0 +1,27 @@
+bootloader_file = "bootloader_for_lium"
+
+connect '/C=1'
+
+waitln "Board information"
+i = 50
+do while i>0
+    i = i - 1
+    sendln ""
+loop
+
+waitln "Libra>"
+
+sendln ""
+sendln ""
+pause 3
+
+sendln "tftp " bootloader_file " loader"
+pause 1
+waitln "TFTP: complted"
+pause 1
+sendln ""
+
+sendln "flash loader"
+waitln "MTD write successful"
+pause 1
+sendln ""

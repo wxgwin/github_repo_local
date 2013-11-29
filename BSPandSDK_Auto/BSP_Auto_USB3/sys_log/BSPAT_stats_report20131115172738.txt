@@ -1,0 +1,19 @@
+[State] : [ Case Name ] $[ Prority ] [ Module ] [Title]
+--------------------------------------------------------------------------------
+
+Passed  : BSP-1052     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_128K_30s.rm
+Passed  : BSP-1053     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_192K_30s.rm
+Passed  : BSP-1054     $H        AUDIO    DEC_REAL_AUDIO_raac_WhiteFlag_RA10_AAC_160K_20-50s.rm
+Passed  : BSP-1055     $H        AUDIO    DEC_REAL_AUDIO_dnet_pegasus_mjpeg.avi.rm
+Passed  : BSP-1056     $H        AUDIO    DEC_REAL_AUDIO_dnet_sp_sample1.rm
+Passed  : BSP-1057     $H        AUDIO    DEC_REAL_AUDIO_dnet_sp_sample2.rm
+Failed  : BSP-1061     $H        AUDIO    DEC_REAL_AUDIO_cook_mc_sich_ra8_20.rm
+Passed  : BSP-1062     $H        AUDIO    DEC_REAL_AUDIO_cook_mc_sich_ra8_44.rm
+Failed  : BSP-1063     $H        AUDIO    DEC_REAL_AUDIO_cook_multichannel.001
+Failed  : BSP-1064     $H        AUDIO    DEC_REAL_AUDIO_cook_Vetenskap_extramaterial_2005-10-31_142936.rm
+Failed  : BSP-1065     $H        AUDIO    DEC_REAL_AUDIO_cook_Vetenskap_mosbricka_2005-03-02_105820.rm
+Passed  : BSP-1066     $H        AUDIO    DEC_REAL_AUDIO_cook_5.1_hotel_california_ra5.1_640x480_30s.001
+Passed  : BSP-1067     $H        AUDIO    DEC_REAL_AUDIO_cook_5.1_multichannel.rma
+Passed  : BSP-1068     $H        AUDIO    DEC_REAL_AUDIO_cook_5.1_samplerv.001
+Failed  : BSP-1070     $H        AUDIO    DEC_REAL_AUDIO_cook_stereo_gg.rm
+Passed  : BSP-1071     $H        AUDIO    DEC_REAL_AUDIO_cook - missing channel.001

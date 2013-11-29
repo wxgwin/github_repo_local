@@ -1,0 +1,88 @@
+rootfs_file = "lium.rootfs.tar.gz"
+platform_PROMPT = "sh-4.2#"
+bootloader_file = "c:\bin\bootloader.sign"
+kernel_file = "c:\bin\zImage"
+eth_boot_cmd = "obd set CMD_LINE_ETH_BOOT console=ttyLBR2,115200 mem=64M ip=bootp root=/dev/nfs rw nolock,tcp nfsroot=192.168.1.99:/nfsroot/lium.rootfs/ no_console_suspend=1"
+
+connect '/C=1'
+;waitln "Libra-2.0.5"
+waitln "Board information"
+i = 50
+do while i>0
+    i = i - 1
+    sendln ""
+loop
+
+waitln "Libra>"
+
+sendln ""
+sendln ""
+pause 3
+
+sendln "xmodem loader"
+pause 3
+xmodemsend bootloader_file 1
+waitln "successfully"
+pause 2
+sendln ""
+
+sendln "flash loader"
+waitln "MTD write successful"
+pause 2
+sendln ""
+
+sendln "xmodem kernel"
+pause 3
+xmodemsend kernel_file 1
+waitln "successfully"
+pause 2
+sendln ""
+
+sendln "flash kernel"
+waitln "MTD write successful"
+pause 2
+sendln ""
+
+
+sendln eth_boot_cmd
+sendln ""
+
+ret=0
+while ret==0
+  sendln "doboot eth" 
+  timeout = 15 
+  waitln "Starting mdev"
+  ret = result
+endwhile
+timeout = 0
+
+pause 3
+sendln ""
+sendln "ls"
+
+sendln "flash_erase /dev/mtd0 0 0"
+waitln "100 % complete"
+pause 5
+
+sendln "ubiattach /dev/ubi_ctrl -m 0 -d 0"
+waitln "UBI device number 0"
+pause 5
+
+sendln "ubimkvol /dev/ubi0 -N rootfs -s 480MiB"
+waitln "rootfs"
+pause 3
+
+sendln "mount -t ubifs ubi0_0 /mnt"
+waitln "UBIFS: reserved for root:"
+pause 1
+
+sendln "tar -zxvf " rootfs_file " -C /mnt"
+pause 20
+waitln "sh-4.2"
+
+sendln "sync"
+pause 5
+
+sendln "umount /mnt"
+waitln "un-mount UBI device"
+pause 3

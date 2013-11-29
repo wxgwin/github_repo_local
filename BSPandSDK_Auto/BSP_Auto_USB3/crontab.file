@@ -1,0 +1,2 @@
+15 18 * * * /root/BSP_Auto/run.sh
+#* * * * * /root/BSP_Auto/test.sh >> /tmp/aaa

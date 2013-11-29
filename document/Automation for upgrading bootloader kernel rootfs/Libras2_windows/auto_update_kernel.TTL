@@ -1,0 +1,31 @@
+rootfs_file = "lium.rootfs.tar.gz"
+platform_PROMPT = "sh-4.2#"
+bootloader_file = "c:\bin\bootloader.sign"
+kernel_file = "c:\bin\zImage"
+eth_boot_cmd = "obd set CMD_LINE_ETH_BOOT console=ttyLBR2,115200 mem=64M ip=bootp root=/dev/nfs rw nolock,tcp nfsroot=192.168.1.99:/nfsroot/lium.rootfs/ no_console_suspend=1"
+
+connect '/C=1'
+waitln "Libra-2.0.5"
+i = 50
+do while i>0
+    i = i - 1
+    sendln ""
+loop
+
+waitln "Board information"
+sendln ""
+sendln ""
+pause 3
+
+sendln "xmodem kernel"
+pause 3
+xmodemsend kernel_file 1
+waitln "successfully"
+pause 2
+sendln ""
+
+sendln "flash kernel"
+waitln "MTD write successful"
+pause 2
+sendln ""
+

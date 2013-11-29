@@ -1,0 +1,27 @@
+kernel_file = "zImage_for_lium_libra2_ubi_ntfs"
+
+connect '/C=1'
+waitln "Libra-2.0.5"
+i = 50
+do while i>0
+    i = i - 1
+    sendln ""
+loop
+
+waitln "Board information"
+sendln ""
+sendln ""
+pause 3
+
+sendln "tftp " kernel_file " kernel"
+pause 1
+waitln "TFTP: complted"
+pause 1
+sendln ""
+
+sendln "flash kernel"
+waitln "MTD write successful"
+pause 1
+sendln ""
+
+

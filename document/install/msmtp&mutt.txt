@@ -1,0 +1,35 @@
+1、下载安装msmtp软件(类似于一个foxmail工具)：
+下载地址：http://downloads.sourceforge.net/msmtp/msmtp-1.4.16.tar.bz2?modtime=1217206451&big_mirror=0 
+# tar jxvf msmtp-1.4.16.tar.bz2
+# cd msmtp-1.4.16
+# ./configure --prefix=/usr/local/msmtp
+# make
+# make install
+2、创建msmtp配置文件和日志文件（host后面为第三方邮件的域名，from后面为发件人的邮箱名称，邮件用户名test，密码123456）
+
+note : msmtprc can be edited on folder /usr/local/msmtp/etc
+
+# vim ~/.msmtprc 
+account default 
+host 126.com 
+from test@126.com 
+auth login 
+user test 
+password 123456 
+logfile ~/.msmtp.log 
+# chmod 600 ~/.msmtprc
+# touch ~/.msmtp.log
+3、mutt安装配置：（一般linux下有默认安装mutt）
+# vim ~/.muttrc
+set sendmail="/usr/local/msmtp/bin/msmtp" 
+set use_from=yes set realname="memory" 
+set from=test@126.com 
+set envelope_from=yes 
+set rfc2047_parameters=yes 
+set charset="utf-8" 
+set send_charset="gb2312" 
+set send_charset="utf-8" 
+set send_charset="us-ascii:gbk:utf-8"
+
+4、邮件发送测试（-s邮件标题，-a表加附件） 
+# echo "邮件内容123456" | mutt -s "邮件标题测试邮件" -a /scripts/test.txt test@126.com

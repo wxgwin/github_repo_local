@@ -1,0 +1,9 @@
+[State] : [ Case Name ] $[ Prority ] [ Module ] [Title] [Note]
+--------------------------------------------------------------------------------
+
+Passed  : BSP-1052     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_128K_30s.rm 
+Passed  : BSP-1053     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_192K_30s.rm 
+Passed  : BSP-1054     $H        AUDIO    DEC_REAL_AUDIO_raac_WhiteFlag_RA10_AAC_160K_20-50s.rm 
+Passed  : BSP-1055     $H        AUDIO    DEC_REAL_AUDIO_dnet_pegasus_mjpeg.avi.rm 
+Passed  : BSP-1056     $H        AUDIO    DEC_REAL_AUDIO_dnet_sp_sample1.rm 
+Passed  : BSP-1057     $H        AUDIO    DEC_REAL_AUDIO_dnet_sp_sample2.rm 

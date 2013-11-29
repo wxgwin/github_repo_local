@@ -1,0 +1,7 @@
+[State] : [ Case Name ] $[ Prority ] [ Module ] [Title]
+--------------------------------------------------------------------------------
+
+Failed  : BSP-1948     $H        ACTIVE   MODE
+Failed  : BSP-1943     $H        ASCII    MODE_TRANSFER
+Passed  : BSP-1052     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_128K_30s.rm
+Passed  : BSP-1053     $H        AUDIO    DEC_REAL_AUDIO_raac_HeyYa_RA10_AAC_192K_30s.rm
